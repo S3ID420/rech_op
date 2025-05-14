@@ -22,24 +22,13 @@ export default function SolutionModal({ results, objective, objective_label, sta
       return;
     }
 
-    const filteredFlows = results.filter(([_, value]) => parseFloat(value) > 0.001);
+    const filteredFlows = results;
     setNonZeroFlows(filteredFlows);
 
     // Build graph representation and max flow paths
     const graph = {};
     const flowPaths = [];
-    filteredFlows.forEach(([edgeName, flow]) => {
-      const edgePart = edgeName.startsWith('flow_') ? edgeName.replace('flow_', '') : edgeName;
-      const [from, to] = edgePart.split('_');
-      if (isNaN(parseInt(from)) || isNaN(parseInt(to))) {
-        console.warn(`Invalid edge name: ${edgeName}`);
-        return;
-      }
-      if (!graph[from]) graph[from] = [];
-      graph[from].push({ to, flow });
-      // Include all non-zero flow edges in maxFlowPath
-      flowPaths.push({ from, to, flow });
-    });
+    
     console.log('Graph:', graph);
     setMaxFlowPath(flowPaths);
   }, [results]);
@@ -56,9 +45,8 @@ export default function SolutionModal({ results, objective, objective_label, sta
 
     // Collect unique node IDs from non-zero flows
     const nodeIds = new Set();
-    nonZeroFlows.forEach(([edgeName]) => {
-      const edgePart = edgeName.startsWith('flow_') ? edgeName.replace('flow_', '') : edgeName;
-      const [from, to] = edgePart.split('_');
+    console.log('Non-Zero Flows:', nonZeroFlows);
+    nonZeroFlows.forEach(({from, to, _}) => {
       if (!isNaN(parseInt(from)) && !isNaN(parseInt(to))) {
         nodeIds.add(parseInt(from));
         nodeIds.add(parseInt(to));
@@ -91,10 +79,8 @@ export default function SolutionModal({ results, objective, objective_label, sta
     console.log('NodePositions:', nodePositions);
 
     // Draw edges
-    nonZeroFlows.forEach(([edgeName, value]) => {
-      const edgePart = edgeName.startsWith('flow_') ? edgeName.replace('flow_', '') : edgeName;
-      const [from, to] = edgePart.split('_');
-      const flowValue = parseFloat(value);
+    nonZeroFlows.forEach(({from, to, cap}) => {
+      const flowValue = parseFloat(cap);
       if (flowValue <= 0.001 || isNaN(parseInt(from)) || isNaN(parseInt(to))) return;
 
       const fromPos = nodePositions[parseInt(from)];
@@ -177,9 +163,7 @@ export default function SolutionModal({ results, objective, objective_label, sta
   const isMaxFlowEdge = (edgeName) => {
     const edgePart = edgeName.startsWith('flow_') ? edgeName.replace('flow_', '') : edgeName;
     const [from, to] = edgePart.split('_');
-    return nonZeroFlows.some(([name]) => {
-      const namePart = name.startsWith('flow_') ? name.replace('flow_', '') : name;
-      const [nFrom, nTo] = namePart.split('_');
+    return nonZeroFlows.some(({nFrom, nTo, _}) => {
       return nFrom === from && nTo === to;
     });
   };
@@ -216,49 +200,7 @@ export default function SolutionModal({ results, objective, objective_label, sta
           </div>
         </div>
         
-        <h4>Flow Assignment Table</h4>
-        <div className="solution-table-container" style={{ maxHeight: '200px', overflowY: 'auto' }}>
-          <table className="solution-table">
-            <thead>
-              <tr>
-                <th>Edge</th>
-                <th>Flow</th>
-                <th>Path</th>
-              </tr>
-            </thead>
-            <tbody>
-              {results.map(([varName, value], index) => {
-                const flowValue = parseFloat(value);
-                const isMaxPath = isMaxFlowEdge(varName);
-                if (flowValue <= 0.001) return null; // Only show non-zero flows
-                return (
-                  <tr
-                    key={index}
-                    className="max-flow-path"
-                    style={{ 
-                      backgroundColor: 'rgba(72, 187, 120, 0.1)' // Green background for all
-                    }}
-                  >
-                    <td>{varName}</td>
-                    <td>{flowValue.toFixed(2)}</td>
-                    <td>
-                      <span className="path-badge" style={{ 
-                        backgroundColor: '#48bb78',
-                        color: 'white',
-                        padding: '2px 8px',
-                        borderRadius: '4px',
-                        fontSize: '12px',
-                        fontWeight: '600'
-                      }}>
-                        Max Flow Path
-                      </span>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        
         <div className="buttons" style={{ marginTop: '20px' }}>
           <button 
             className="secondary" 

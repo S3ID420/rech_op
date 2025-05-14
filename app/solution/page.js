@@ -16,17 +16,12 @@ export default function Solution() {
   
   useEffect(() => {
     // Find edges with positive flow to identify the max flow path
-    const nonZeroFlows = results.filter(([_, value]) => parseFloat(value) > 0.001);
+    const nonZeroFlows = results.filter(({_, _, cap}) => parseFloat(value) > 0.001);
     
     // Create a directed graph representation
     const graph = {};
-    nonZeroFlows.forEach(([edgeName, flow]) => {
-      // Parse edge name to get from and to nodes
-      // Assumes edge name is in format "x_y" where x is source and y is target
-      const [from, to] = edgeName.split('_');
-      
-      if (!graph[from]) graph[from] = [];
-      graph[from].push({ to, flow });
+    nonZeroFlows.forEach(({from, to, cap}) => {
+      graph[from].push({ to, cap });
     });
     
     // DFS to find all paths from start to end with flow > 0
