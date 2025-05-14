@@ -1,8 +1,8 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Network Flow Solver',
-  description: 'Max Flow Problem Solver with React Flow',
+  title: 'Irrigation System Optimization',
+  description: 'maximize the flow of water in an irrigation system',
 };
 
 export default function RootLayout({ children }) {

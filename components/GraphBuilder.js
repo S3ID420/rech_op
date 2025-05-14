@@ -332,7 +332,7 @@ function GraphBuilderContent({
         `}
       </style>
       <div className="header">
-        <h1>Network Flow Solver</h1>
+        <h1>Irrigation System optimizer</h1>
         <div className="header-buttons">
           <button 
             className={nodeMode === 'delete' ? 'delete-mode' : 'secondary'}
