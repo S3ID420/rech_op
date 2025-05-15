@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import styles from './Modal.css';
+import   './Modal.css';
 
 export default function ResultsModal({ isOpen, onClose, results }) {
   useEffect(() => {

@@ -54,6 +54,7 @@ export default function OptimizationForm({ cities, setResults, setError }) {
       };
 
       const response = await axios.post('http://localhost:5000/solve', data);
+      // Pass the results to parent component without showing a toast here
       setResults(response.data);
     } catch (err) {
       setError(err.response?.data?.error || 'An error occurred during optimization.');
