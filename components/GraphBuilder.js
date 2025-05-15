@@ -18,6 +18,7 @@ import EdgeFormModal from './EdgeFormModal';
 import SolutionModal from './SolutionModal';
 import useToast from './UseToast';
 import { ToastContainer } from 'react-toastify';
+import "../app/network/page.css"
 
 const nodeStyles = {
   width: 48,

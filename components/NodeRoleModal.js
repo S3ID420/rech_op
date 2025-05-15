@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Modal from './Modal';
+import "../app/network/page.css"
 
 export default function NodeRoleModal({ nodeId, onSubmit, onClose }) {
   const [role, setRole] = useState('none');

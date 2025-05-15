@@ -1,3 +1,4 @@
+import "../app/network/page.css"
 export default function Modal({ children, onClose }) {
   return (
     <>

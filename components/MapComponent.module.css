@@ -1,0 +1,137 @@
+.mapWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.mapHeader {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.mapHeader h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  margin-bottom: 0.25rem;
+}
+
+.mapHint {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.mapContainer {
+  height: 500px;
+  border: 2px solid #000000;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 80vh;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 1;
+  transition: all 0.2s ease;
+}
+
+.mapContainer:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Custom marker styles */
+.marker {
+  width: 32px;
+  height: 42px;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.marker:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.3));
+}
+
+.selectedMarker {
+  width: 32px;
+  height: 42px;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.3));
+  transform: scale(1.1);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.selectedMarker:hover {
+  transform: scale(1.2);
+}
+
+
+
+.popupContent {
+  padding: 1rem;
+}
+
+.popupContent h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.75rem 0;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 0.5rem;
+}
+
+.popupDetails {
+  margin-bottom: 1rem;
+}
+
+.popupItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.popupLabel {
+  color: #6b7280;
+}
+
+.popupButton {
+  width: 100%;
+  background-color: #f3f4f6;
+  color: #111827;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.popupButton:hover {
+  background-color: #e5e7eb;
+}
+
+.popupButtonSelected {
+  width: 100%;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.popupButtonSelected:hover {
+  background-color: #2563eb;
+}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Modal from './Modal';
 import useToast from './UseToast';
-
+import "../app/network/page.css"
 export default function EdgeFormModal({ edge, onSubmit, onClose }) {
   const [form, setForm] = useState({
     source: edge?.source || '',

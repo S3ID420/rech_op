@@ -1,3 +1,4 @@
+import "../app/network/page.css"
 export default function EdgeForm({ edgeForm, setEdgeForm, addEdge }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
